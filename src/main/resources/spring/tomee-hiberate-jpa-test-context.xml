@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
@@ -11,23 +10,66 @@ http://www.springframework.org/schema/jdbc http://www.springframework.org/schema
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 ">
 
+    <!--Activates various annotations to be detected in bean classes-->
     <context:annotation-config />
 
-    <context:component-scan base-package="tomee.hibernate.jpa.test.entity" />
+    <!--Scans the classpath for annotated components that will be auto-registered as-->
+    <!--Spring beans. By default, the Spring-provided @Component, @Repository,-->
+    <!--@Service, and @Controller stereotypes will be detected.-->
+    <context:component-scan base-package="tomee.hibernate.jpa.test" />
 
     <jdbc:embedded-database id="dataSource">
         <jdbc:script location="classpath:db/schema.sql"/>
-
     </jdbc:embedded-database>
 
-
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="movie-unit" />
+    <bean id="db-hibernate-session-factory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-            </props>
+        <property name="hibernateProperties" ref="db-hibernate-properties" />
+        <property name="packagesToScan">
+            <list>
+                <value>tomee.hibernate.jpa.test</value>
+            </list>
+        </property>
+        <property name="mappingResources">
+            <list>
+
+            </list>
         </property>
     </bean>
+
+    <bean id="db-hibernate-properties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <!-- Set a maximum "depth" for the outer join fetch tree for single-ended
+                        associations (one-to-one, many-to-one). A 0 disables default outer join fetching.
+                        Documentation recommends 0..3 -->
+                <prop key="hibernate.max_fetch_depth">3</prop>
+                <!-- disable second lvl caching -->
+                <!--<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>-->
+                <!-- Development settings -->
+                <prop key="hibernate.show_sql">${hibernate.show.sql}</prop>
+                <prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
+                <prop key="hibernate.connection.release_mode">on_close</prop>
+                <!-- Setting below is makes hibernate behaves properly with triggers. -->
+                <prop key="hibernate.jdbc.use_get_generated_keys">false</prop>
+            </props>
+        </property>
+        <!-- Provide additional external properties to set, if required -->
+        <property name="location"
+                  value="classpath:db-hibernate.properties" />
+        <property name="ignoreResourceNotFound" value="false" />
+    </bean>
+
+    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
+        <!--<property name="persistenceUnitName" value="movie-unit" />-->
+        <!--<property name="dataSource" ref="dataSource" />-->
+        <!--<property name="jpaProperties">-->
+            <!--<props>-->
+                <!--<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
 </beans>

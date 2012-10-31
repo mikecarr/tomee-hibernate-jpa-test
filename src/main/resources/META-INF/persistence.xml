@@ -5,5 +5,8 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
     <persistence-unit name="movie-unit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>
+            tomee.hibernate.jpa.test.entity.Movie
+        </class>
     </persistence-unit>
 </persistence>
