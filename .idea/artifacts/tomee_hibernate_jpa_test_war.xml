@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="tomee-hibernate-jpa-test:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="tomee-hibernate-jpa-test.war">
-      <element id="artifact" artifact-name="tomee-hibernate-jpa-test:war exploded" />
-    </root>
-  </artifact>
-</component>
