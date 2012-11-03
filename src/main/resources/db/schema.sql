@@ -1,7 +1,6 @@
 CREATE TABLE movie(
-id  number primary key entity,
-director varchar,
-title varchar,
+id  int primary key,
+director varchar(50),
+title varchar(50),
 year int
-
-)
+);

@@ -9,6 +9,10 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -34,15 +38,18 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
+<<<<<<< HEAD
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
       <excludeFolder url="file://$MODULE_DIR$/target/surefire" />
       <excludeFolder url="file://$MODULE_DIR$/target/tomee-hibernate-jpa-test" />
+=======
+>>>>>>> 72c4885c4299af122c1f6d75b4c2646c76ceb365
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7" level="application_server_libraries" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 7" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 1.5 EE" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="TomEE + 1.5" level="application_server_libraries" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-asm:3.1.2.RELEASE" level="project" />
@@ -55,66 +62,20 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:3.1.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:3.1.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:4.1.7.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.0.GA" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.15.0-GA" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:4.1.7.Final" level="project" />
+    <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.common:hibernate-commons-annotations:4.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.persistence:persistence-api:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.openejb:javaee-api:6.0-4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb:openejb-core:4.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb:mbean-annotation-api:4.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb:openejb-jpa-integration:4.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb:openejb-api:4.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb:openejb-loader:4.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb:openejb-javaagent:4.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb:openejb-jee:4.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.5" level="project" />
-    <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.activemq:activemq-ra:5.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.activemq:activemq-core:5.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.activemq:kahadb:5.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.activemq.protobuf:activemq-protobuf:1.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-net:commons-net:2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.geronimo.components:geronimo-connector:3.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.geronimo.components:geronimo-transaction:3.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-j2ee-connector_1.6_spec:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.objectweb.howl:howl:1.0.1-1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.geronimo.javamail:geronimo-javamail_1.4_mail:1.8.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-asm-shaded:3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-finder-shaded:3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-reflect:3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-naming:3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-bundleutils:3.11" level="project" />
-    <orderEntry type="library" name="Maven: org.hsqldb:hsqldb:2.2.8" level="project" />
-    <orderEntry type="library" name="Maven: commons-dbcp:commons-dbcp:1.4" level="project" />
-    <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.5.7" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.swizzle:swizzle-stream:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: wsdl4j:wsdl4j:1.6.2" level="project" />
-    <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openwebbeans:openwebbeans-impl:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openwebbeans:openwebbeans-spi:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openwebbeans:openwebbeans-ejb:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openwebbeans:openwebbeans-ee:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openwebbeans:openwebbeans-ee-common:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openwebbeans:openwebbeans-web:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: org.javassist:javassist:3.15.0-GA" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.openejb.patch:openjpa-asm-shaded:2.2.0" level="project" />
-    <orderEntry type="library" name="Maven: net.sourceforge.serp:serp:1.13.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
-    <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.fusesource.jansi:jansi:1.8" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:4.1.6.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.0.GA" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:4.1.6.Final" level="project" />
-    <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
-    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate.common:hibernate-commons-annotations:4.0.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:4.3.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-ehcache:4.1.6.Final" level="project" />
-    <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache-core:2.6.0" level="project" />
-    <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache-terracotta:2.6.0" level="project" />
-    <orderEntry type="library" name="Maven: org.terracotta:terracotta-toolkit-1.6-runtime:5.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-jdk14:1.6.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 72" level="application_server_libraries" />
   </component>
 </module>
 
