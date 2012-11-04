@@ -33,14 +33,14 @@ public interface BaseService<T> {
      *
      * @param modelObject the model to create
      */
-    public void create(T modelObject);
+    public T create(T modelObject);
 
     /**
      * Update the persistent state to reflect the model.
      *
      * @param modelObject the model to update
      */
-    public void update(T modelObject);
+    public T update(T modelObject);
 
     /**
      * Delete the persistent state for the model.

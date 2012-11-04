@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -19,24 +21,8 @@ import java.util.List;
  */
 public abstract class HibernateBaseService<T> implements BaseService<T>
 {
-
-    protected SessionFactory sessionFactory;
-
-    public void flush()
-    {
-        this.sessionFactory.getCurrentSession().flush();
-    }
-
-    protected Session getSession()
-    {
-        return this.sessionFactory.getCurrentSession();
-    }
-
-    @Autowired(required=true)
-    public void setSessionFactory(@Qualifier("db-hibernate-session-factory") SessionFactory sessionFactory)
-    {
-        this.sessionFactory = sessionFactory;
-    }
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     /* (non-Javadoc)
      * @see com.qualcomm.service.BaseService#findAll(java.lang.Class)
@@ -48,7 +34,7 @@ public abstract class HibernateBaseService<T> implements BaseService<T>
         Validate.notNull(type, "Model type is required");
         Validate.isTrue(type.isAnnotationPresent(Entity.class), "Only javax.persistence.Entity objects can be found");
         String queryString = "from " + type.getCanonicalName() + " model";
-        return Collections.checkedList(getSession().createQuery(queryString).list(), type);
+        return Collections.checkedList(entityManager.createQuery(queryString).getResultList(), type);
     }
 
     /* (non-Javadoc)
@@ -61,7 +47,7 @@ public abstract class HibernateBaseService<T> implements BaseService<T>
         Validate.notNull(type, "Model type is required");
         Validate.isTrue(type.isAnnotationPresent(Entity.class), "Only javax.persistence.Entity objects can be found");
         Validate.notNull(key, "Primary Key is required");
-        return (T) getSession().get(type, key);
+        return (T) entityManager.find(type, key);
     }
 
     /*
@@ -70,10 +56,11 @@ public abstract class HibernateBaseService<T> implements BaseService<T>
 	 */
     @Transactional
     @Override
-    public void create(T modelObject)
+    public T create(T modelObject)
     {
         validateModel(modelObject);
-        getSession().save(modelObject);
+        this.entityManager.persist(modelObject);
+        return modelObject;
     }
 
     /*
@@ -82,10 +69,10 @@ public abstract class HibernateBaseService<T> implements BaseService<T>
       */
     @Override
     @Transactional
-    public void update(T modelObject)
+    public T update(T modelObject)
     {
         validateModel(modelObject);
-        getSession().update(modelObject);
+        return this.entityManager.merge(modelObject);
     }
 
     /*
@@ -97,7 +84,8 @@ public abstract class HibernateBaseService<T> implements BaseService<T>
     public void delete(T modelObject)
     {
         validateModel(modelObject);
-        getSession().delete(modelObject);
+        modelObject = this.entityManager.merge(modelObject);
+        this.entityManager.remove(modelObject);
     }
 
     @SuppressWarnings("unchecked")

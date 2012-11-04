@@ -4,11 +4,17 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:cxf="http://cxf.apache.org/core"
        xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 ">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
 
     <!--Activates various annotations to be detected in bean classes-->
     <context:annotation-config />
@@ -18,58 +24,35 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <!--@Service, and @Controller stereotypes will be detected.-->
     <context:component-scan base-package="tomee.hibernate.jpa.test" />
 
+
+    <jaxrs:server id="movieRestService" address="/">
+        <jaxrs:features>
+            <cxf:logging />
+        </jaxrs:features>
+        <jaxrs:serviceBeans>
+            <ref bean="movieRestServiceBean" />
+        </jaxrs:serviceBeans>
+        <jaxrs:extensionMappings>
+            <entry key="xml" value="application/xml" />
+            <entry key="json" value="application/json" />
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
+
+
+    <bean id="movieRestServiceBean" class="tomee.hibernate.jpa.test.rest.MovieRestServiceImpl" />
+
     <jdbc:embedded-database id="dataSource">
         <jdbc:script location="classpath:db/schema.sql"/>
     </jdbc:embedded-database>
 
-    <bean id="db-hibernate-session-factory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="hibernateProperties" ref="db-hibernate-properties" />
-        <property name="packagesToScan">
-            <list>
-                <value>tomee.hibernate.jpa.test</value>
-            </list>
-        </property>
-        <property name="mappingResources">
-            <list>
-
-            </list>
-        </property>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:jpaVendorAdapter-ref="hibernateVendor"
+          p:dataSource-ref="dataSource"
+          p:packagesToScan="tomee.hibernate.jpa.test"
+          >
     </bean>
 
-    <bean id="db-hibernate-properties"
-          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="properties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
-                <!-- Set a maximum "depth" for the outer join fetch tree for single-ended
-                        associations (one-to-one, many-to-one). A 0 disables default outer join fetching.
-                        Documentation recommends 0..3 -->
-                <prop key="hibernate.max_fetch_depth">3</prop>
-                <!-- disable second lvl caching -->
-                <!--<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>-->
-                <!-- Development settings -->
-                <prop key="hibernate.show_sql">${hibernate.show.sql}</prop>
-                <prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
-                <prop key="hibernate.connection.release_mode">on_close</prop>
-                <!-- Setting below is makes hibernate behaves properly with triggers. -->
-                <prop key="hibernate.jdbc.use_get_generated_keys">false</prop>
-            </props>
-        </property>
-        <!-- Provide additional external properties to set, if required -->
-        <property name="location"
-                  value="classpath:db-hibernate.properties" />
-        <property name="ignoreResourceNotFound" value="false" />
-    </bean>
+    <bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+          p:showSql="false"/>
 
-    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-        <!--<property name="persistenceUnitName" value="movie-unit" />-->
-        <!--<property name="dataSource" ref="dataSource" />-->
-        <!--<property name="jpaProperties">-->
-            <!--<props>-->
-                <!--<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
 </beans>

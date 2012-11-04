@@ -3,6 +3,7 @@ package tomee.hibernate.jpa.test.service;
 import org.springframework.stereotype.Service;
 import tomee.hibernate.jpa.test.entity.Movie;
 
+import javax.ejb.EJB;
 import java.util.List;
 
 /**
