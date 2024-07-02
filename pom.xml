@@ -6,7 +6,7 @@
     <packaging>war</packaging>
     <version>1.0</version>
     <properties>
-        <spring-version>3.1.2.RELEASE</spring-version>
+        <spring-version>5.2.21.RELEASE</spring-version>
     </properties>
     <name>tomee-hibernate-jpa-test Maven Webapp</name>
     <url>http://maven.apache.org</url>
